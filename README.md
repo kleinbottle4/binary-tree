@@ -1,7 +1,7 @@
-# binary-list
+# binary-tree
 A doubly-linked binary tree (with a pointer to 'left', 'right' and 'prev').
 
-How to use direction strings
+*How to use direction strings*
 
 When using certain functions, such as b\_list\_seek, it is necessary to provide
 a direction string. For example, consider the following binary tree:
