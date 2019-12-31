@@ -26,12 +26,12 @@
 #define LEAF_T int
 #endif
 
-#define BRANCH_DIRN bool
-#define BRANCH_LEFT false
-#define BRANCH_RIGHT true
+#define BT_DIRN bool
+#define BT_LEFT false
+#define BT_RIGHT true
 
-#define LEAF_ERROR true
-#define LEAF_NO_ERR false
+#define BT_ERROR true
+#define BT_NO_ERR false
 
 typedef struct leaf {
 	T_NODE_T val;
@@ -70,10 +70,10 @@ bool tree_insert
 {
 	LEAF *p = tree_seek(self, dirns);
 	if (p == NULL) {
-		return TREE_ERROR;
+		return BT_ERROR;
 	} else {
 		LEAF *n;
-		if (dirn == TREE_LEFT) {
+		if (dirn == BT_LEFT) {
 			p->left = malloc(sizeof(LEAF));
 			n = p->left;
 		} else {
@@ -81,7 +81,7 @@ bool tree_insert
 			n = p->right;
 		}
 		n->val = val;
-		return TREE_NO_ERR;
+		return BT_NO_ERR;
 	}
 }
 
@@ -89,10 +89,10 @@ bool tree_set(LEAF *self, const char *dirn, LEAF_T val)
 {
 	LEAF *p = tree_seek(self, dirn);
 	if (p == NULL) {
-		return TREE_ERROR;
+		return BT_ERROR;
 	} else {
 		p->val = val;
-		return TREE_NO_ERR;
+		return BT_NO_ERROR;
 	}
 }
 
