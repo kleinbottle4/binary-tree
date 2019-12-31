@@ -30,7 +30,7 @@
 #define BT_LEFT false
 #define BT_RIGHT true
 
-#define BT_ERROR true
+#define BT_ERR true
 #define BT_NO_ERR false
 
 typedef struct b_node {
@@ -39,9 +39,9 @@ typedef struct b_node {
 } B_NODE;
 
 B_NODE   *tree_new   (B_NODE_T val);
-B_NODE   *tree_seek  (B_NODE_T *, const char *);
-bool      tree_insert(B_NODE_T *, const char *, BT_DIRN, B_NODE_T);
-bool      tree_set   (B_NODE_T *, const char *, B_NODE_T);
+B_NODE   *tree_seek  (B_NODE *, const char *);
+bool      tree_insert(B_NODE *, const char *, BT_DIRN, B_NODE_T);
+bool      tree_set   (B_NODE *, const char *, B_NODE_T);
 
 B_NODE *tree_new (B_NODE_T val)
 {
@@ -70,7 +70,7 @@ bool tree_insert
 {
 	B_NODE *p = tree_seek(self, dirns);
 	if (p == NULL) {
-		return BT_ERROR;
+		return BT_ERR;
 	} else {
 		B_NODE *n;
 		if (dirn == BT_LEFT) {
@@ -89,10 +89,10 @@ bool tree_set(B_NODE *self, const char *dirn, B_NODE_T val)
 {
 	B_NODE *p = tree_seek(self, dirn);
 	if (p == NULL) {
-		return BT_ERROR;
+		return BT_ERR;
 	} else {
 		p->val = val;
-		return BT_NO_ERROR;
+		return BT_NO_ERR;
 	}
 }
 
