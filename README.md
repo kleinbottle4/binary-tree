@@ -6,7 +6,7 @@ A doubly-linked binary tree (with a pointer to `left`, `right` and `prev`).
 When using certain functions, such as `tree_seek`, it is necessary to provide
 a direction string. For example, consider the following binary tree:
 
-(B\_NODE\_T has been set to	`float`, and the head of the tree is `head`)
+(`B_NODE_T` has been set to	`float`, and the head of the tree is `head`)
 ```
                   "ll": 1.1
                  /
