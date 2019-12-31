@@ -1,5 +1,5 @@
 /*
- * b_node.h
+ * binary_tree.h
  * Copyright (C) 2019  Syed Shah
 
  * This program is free software: you can redistribute it and/or modify
@@ -19,37 +19,42 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#ifndef INCLUDE_B_NODE
-#define INCLUDE_B_NODE
+#ifndef INCLUDE_TREE
+#define INCLUDE_TREE
 
-#ifndef B_NODE_T
-#define B_NODE_T int
+#ifndef LEAF_T
+#define LEAF_T int
 #endif
 
-#define B_NODE_DIRN bool
-#define B_NODE_LEFT false
-#define B_NODE_RIGHT true
+#define BRANCH_DIRN bool
+#define BRANCH_LEFT false
+#define BRANCH_RIGHT true
 
-#define B_NODE_ERROR true
-#define B_NODE_NO_ERR false
+#define LEAF_ERROR true
+#define LEAF_NO_ERR false
 
-typedef struct b_node {
-	B_NODE_T val;
-	struct b_node *prev, *left, *right;
-} B_NODE;
+typedef struct leaf {
+	T_NODE_T val;
+	struct leaf *prev, *left, *right;
+} LEAF;
 
-B_NODE *b_list_new(B_NODE_T val)
+LEAF   *tree_new   (LEAF_T val);
+LEAF   *tree_seek  (LEAF_T *, const char *);
+bool    tree_insert(LEAF_T *, const char *, BRANCH_DIRN, LEAF_T);
+bool    tree_set   (LEAF_T *, const char *, LEAF_T);
+
+LEAF *tree_new (LEAF_T val)
 {
-	B_NODE *n = malloc(sizeof(B_NODE));
+	LEAF *n = malloc(sizeof(LEAF));
 	n->val = val;
 	n->left = n->right = NULL;
 	return n;
 }
 
 
-B_NODE *b_list_seek(B_NODE *self, const char *dirn)
+LEAF *tree_seek(LEAF *self, const char *dirn)
 {
-	B_NODE *p = self;
+	LEAF *p = self;
 	for (const char *c = dirn; *c != '\0'; c++) {
 		if (p == NULL)
 			return NULL;
@@ -60,34 +65,34 @@ B_NODE *b_list_seek(B_NODE *self, const char *dirn)
 }
 
 
-bool b_list_insert
-(B_NODE *self, const char *dirns, B_NODE_DIRN dirn, B_NODE_T val)
+bool tree_insert
+(LEAF *self, const char *dirns, TREE_DIRN dirn, LEAF_T val)
 {
-	B_NODE *p = b_list_seek(self, dirns);
+	LEAF *p = tree_seek(self, dirns);
 	if (p == NULL) {
-		return B_NODE_ERROR;
+		return TREE_ERROR;
 	} else {
-		B_NODE *n;
-		if (dirn == B_NODE_LEFT) {
-			p->left = malloc(sizeof(B_NODE));
+		LEAF *n;
+		if (dirn == TREE_LEFT) {
+			p->left = malloc(sizeof(LEAF));
 			n = p->left;
 		} else {
-			p->right = malloc(sizeof(B_NODE));
+			p->right = malloc(sizeof(LEAF));
 			n = p->right;
 		}
 		n->val = val;
-		return B_NODE_NO_ERR;
+		return TREE_NO_ERR;
 	}
 }
 
-bool b_list_set(B_NODE *self, const char *dirn, B_NODE_T val)
+bool tree_set(LEAF *self, const char *dirn, LEAF_T val)
 {
-	B_NODE *p = b_list_seek(self, dirn);
+	LEAF *p = tree_seek(self, dirn);
 	if (p == NULL) {
-		return B_NODE_ERROR;
+		return TREE_ERROR;
 	} else {
 		p->val = val;
-		return B_NODE_NO_ERR;
+		return TREE_NO_ERR;
 	}
 }
 
