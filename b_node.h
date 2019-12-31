@@ -51,14 +51,10 @@ B_NODE *b_list_seek(B_NODE *self, const char *dirn)
 {
 	B_NODE *p = self;
 	for (const char *c = dirn; *c != '\0'; c++) {
-		if (p == NULL) {
+		if (p == NULL)
 			return NULL;
-		} else {
-			if (*c == 'l')
-				p = p->left;
-			else
-				p = p->right;
-		}
+		else
+			p = *c == 'l' ? p->left : p->right;
 	}
 	return p;
 }

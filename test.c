@@ -37,11 +37,14 @@ int main(void)
 
 	bool err1 = test_insert(b, "", B_NODE_LEFT, 1);
 	bool err2 = test_insert(b, "", B_NODE_RIGHT, 2);
+
 	B_NODE *z = test_seek(b, "l");
 	B_NODE *y = test_seek(b, "r");
 	B_NODE *x = test_seek(b, "");
+	/* (head of list) */
+
+	print_val(x, B_NODE_NO_ERR);
 	print_val(z, err1);
 	print_val(y, err2);
-	print_val(x, B_NODE_NO_ERR);
 	return 0;
 }
