@@ -22,8 +22,8 @@
 #ifndef INCLUDE_TREE
 #define INCLUDE_TREE
 
-#ifndef LEAF_T
-#define LEAF_T int
+#ifndef B_NODE_T
+#define B_NODE_T int
 #endif
 
 #define BT_DIRN bool
@@ -33,28 +33,28 @@
 #define BT_ERROR true
 #define BT_NO_ERR false
 
-typedef struct leaf {
-	T_NODE_T val;
-	struct leaf *prev, *left, *right;
-} LEAF;
+typedef struct b_node {
+	B_NODE_T val;
+	struct b_node *prev, *left, *right;
+} B_NODE;
 
-LEAF   *tree_new   (LEAF_T val);
-LEAF   *tree_seek  (LEAF_T *, const char *);
-bool    tree_insert(LEAF_T *, const char *, BRANCH_DIRN, LEAF_T);
-bool    tree_set   (LEAF_T *, const char *, LEAF_T);
+B_NODE   *tree_new   (B_NODE_T val);
+B_NODE   *tree_seek  (B_NODE_T *, const char *);
+bool      tree_insert(B_NODE_T *, const char *, BT_DIRN, B_NODE_T);
+bool      tree_set   (B_NODE_T *, const char *, B_NODE_T);
 
-LEAF *tree_new (LEAF_T val)
+B_NODE *tree_new (B_NODE_T val)
 {
-	LEAF *n = malloc(sizeof(LEAF));
+	B_NODE *n = malloc(sizeof(B_NODE));
 	n->val = val;
 	n->left = n->right = NULL;
 	return n;
 }
 
 
-LEAF *tree_seek(LEAF *self, const char *dirn)
+B_NODE *tree_seek(B_NODE *self, const char *dirn)
 {
-	LEAF *p = self;
+	B_NODE *p = self;
 	for (const char *c = dirn; *c != '\0'; c++) {
 		if (p == NULL)
 			return NULL;
@@ -66,18 +66,18 @@ LEAF *tree_seek(LEAF *self, const char *dirn)
 
 
 bool tree_insert
-(LEAF *self, const char *dirns, TREE_DIRN dirn, LEAF_T val)
+(B_NODE *self, const char *dirns, BT_DIRN dirn, B_NODE_T val)
 {
-	LEAF *p = tree_seek(self, dirns);
+	B_NODE *p = tree_seek(self, dirns);
 	if (p == NULL) {
 		return BT_ERROR;
 	} else {
-		LEAF *n;
+		B_NODE *n;
 		if (dirn == BT_LEFT) {
-			p->left = malloc(sizeof(LEAF));
+			p->left = malloc(sizeof(B_NODE));
 			n = p->left;
 		} else {
-			p->right = malloc(sizeof(LEAF));
+			p->right = malloc(sizeof(B_NODE));
 			n = p->right;
 		}
 		n->val = val;
@@ -85,9 +85,9 @@ bool tree_insert
 	}
 }
 
-bool tree_set(LEAF *self, const char *dirn, LEAF_T val)
+bool tree_set(B_NODE *self, const char *dirn, B_NODE_T val)
 {
-	LEAF *p = tree_seek(self, dirn);
+	B_NODE *p = tree_seek(self, dirn);
 	if (p == NULL) {
 		return BT_ERROR;
 	} else {
