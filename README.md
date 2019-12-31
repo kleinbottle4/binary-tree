@@ -1,12 +1,12 @@
-# binary-tree
-A doubly-linked binary tree (with a pointer to 'left', 'right' and 'prev').
+# binary-tree #
+A doubly-linked binary tree (with a pointer to `left`, `right` and `prev`).
 
-# How to use direction strings
+## How to use direction strings ##
 
-When using certain functions, such as tree\_seek, it is necessary to provide
+When using certain functions, such as `tree_seek`, it is necessary to provide
 a direction string. For example, consider the following binary tree:
 
-(B\_NODE\_T has been set to 'float', and the head of the tree is 'head')
+(B\_NODE\_T has been set to	`float`, and the head of the tree is `head`)
 ```
                   "ll": 1.1
                  /
@@ -21,5 +21,5 @@ a direction string. For example, consider the following binary tree:
                     "rr": 2.2
 ```
 The strings at each node show the required direction string.
-For example,'tree\_seek(head, "")' returns a pointer to the head of the
+For example,`tree_seek(head, "")` returns a pointer to the head of the
 tree.
