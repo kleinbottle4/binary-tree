@@ -48,26 +48,52 @@ B_NODE *b_list_new(T val)
 	return n;
 }
 
+#include <stdio.h>
+
 B_NODE *b_list_seek(B_NODE *self, const char *dirn)
 {
 	B_NODE *p = self;
 	for (const char *c = dirn; *c != '\0'; c++) {
+		puts("loop");
 		if (p == NULL) {
 			return NULL;
 		} else {
-			if (*c == 'l')
+			if (*c == 'l') {
+				puts("left");
 				p = p->left;
-			else
+			} else {
+				puts("right");
 				p = p->right;
+		
+			}
 		}
 	}
 	return p;
 }
 
 
-bool b_list_insert(B_NODE *self, const char *dirn, T val)
+bool b_list_insert(B_NODE *self, const char *dirns, DIRN dirn, T val)
 {
-	B_NODE *p = list_seek(self, dirn);
+	B_NODE *p = b_list_seek(self, dirns);
+	if (p == NULL) {
+		return ERROR;
+	} else {
+		B_NODE *n;
+		if (dirn == LEFT) {
+			p->left = malloc(sizeof(B_NODE));
+			n = p->left;
+		} else {
+			p->right = malloc(sizeof(B_NODE));
+			n = p->right;
+		}
+		n->val = val;
+		return NO_ERR;
+	}
+}
+
+bool b_list_set(B_NODE *self, const char *dirn, T val)
+{
+	B_NODE *p = b_list_seek(self, dirn);
 	if (p == NULL) {
 		return ERROR;
 	} else {
