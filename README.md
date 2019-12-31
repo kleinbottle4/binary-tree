@@ -20,6 +20,7 @@ a direction string. For example, consider the following binary tree:
                    \
                     "rr": 2.2
 ```
-The strings at each node show the required direction string.
+The strings at each node show the required direction string. (The colons are
+not part of the direction string.)
 For example,`tree_seek(head, "")` returns a pointer to the head of the
 tree.
